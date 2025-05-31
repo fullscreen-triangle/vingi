@@ -1,0 +1,215 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vingi"
+version = "1.0.0-beta"
+description = "Vingi Personal Cognitive Load Optimization Framework"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Vingi Team", email = "team@vingi.dev"}
+]
+maintainers = [
+    {name = "Vingi Team", email = "team@vingi.dev"}
+]
+keywords = [
+    "ai", "assistant", "personal", "productivity", "automation",
+    "machine-learning", "nlp", "context", "cognitive-load"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Scheduling",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: System :: Systems Administration",
+    "Typing :: Typed"
+]
+requires-python = ">=3.11"
+dependencies = [
+    # Core ML/AI
+    "torch>=2.0.0",
+    "transformers>=4.21.0",
+    "sentence-transformers>=2.2.0",
+    "scikit-learn>=1.1.0",
+    "numpy>=1.23.0",
+    "pandas>=1.5.0",
+    
+    # Database and Storage
+    "neo4j>=5.0.0",
+    "sqlite3",
+    
+    # Web and API
+    "aiohttp>=3.8.0",
+    "fastapi>=0.95.0",
+    "uvicorn>=0.20.0",
+    
+    # Security and Encryption
+    "cryptography>=37.0.0",
+    "keyring>=23.0.0",
+    
+    # Data Processing
+    "pydantic>=1.10.0",
+    "python-dateutil>=2.8.0",
+    "pytz>=2022.7",
+    
+    # Utilities
+    "click>=8.1.0",
+    "pyyaml>=6.0.0",
+    "requests>=2.28.0",
+    "aiofiles>=23.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0"
+]
+test = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "factory-boy>=3.2.0",
+    "freezegun>=1.2.0"
+]
+docs = [
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+    "myst-parser>=0.19.0"
+]
+ml-extra = [
+    "jupyter>=1.0.0",
+    "matplotlib>=3.6.0",
+    "seaborn>=0.12.0",
+    "plotly>=5.13.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/vingi"
+Documentation = "https://docs.vingi.dev"
+Repository = "https://github.com/yourusername/vingi"
+"Bug Tracker" = "https://github.com/yourusername/vingi/issues"
+Changelog = "https://github.com/yourusername/vingi/blob/main/CHANGELOG.md"
+
+[project.scripts]
+vingi = "vingi.cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["src/python"]
+include = ["vingi*"]
+
+[tool.setuptools.package-data]
+vingi = ["py.typed", "**/*.yml", "**/*.yaml", "**/*.json"]
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ['py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+extra_checks = true
+
+[[tool.mypy.overrides]]
+module = [
+    "neo4j.*",
+    "sentence_transformers.*",
+    "transformers.*",
+    "torch.*",
+    "sklearn.*"
+]
+ignore_missing_imports = true
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --disable-warnings"
+testpaths = ["src/python/tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "ml: marks tests that require ML models"
+]
+asyncio_mode = "auto"
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["src/python/vingi"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/migrations/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod"
+]
+
+# Flake8 configuration
+[tool.flake8]
+max-line-length = 88
+select = ["E", "F", "W", "C90"]
+ignore = [
+    "E203",  # whitespace before ':'
+    "E501",  # line too long (handled by black)
+    "W503"   # line break before binary operator
+]
+per-file-ignores = [
+    "__init__.py:F401",
+    "test_*.py:F401,F811"
+]

@@ -1,0 +1,190 @@
+# Vingi Configuration Template
+# Copy this file to config/development.yml or config/production.yml and customize
+
+# User Profile Configuration
+user_profile:
+  name: "Your Name"
+  email: "your.email@example.com"  # Optional
+  expertise_domains:
+    - "machine learning"
+    - "software engineering"
+    - "research"
+  working_hours:
+    start_time:
+      hour: 9
+      minute: 0
+    end_time:
+      hour: 17
+      minute: 0
+    work_days:
+      - "monday"
+      - "tuesday"
+      - "wednesday"
+      - "thursday"
+      - "friday"
+  privacy_level: "maximum"  # minimal, balanced, maximum
+
+# Privacy Settings
+privacy_settings:
+  privacy_level: "maximum"
+  local_processing_only: true
+  data_retention_days: 365
+  analytics_enabled: false
+  crash_reporting_enabled: false
+  encryption_required: true
+  allowed_data_sources:
+    - "calendar"
+    - "files"
+    - "email"
+
+# Automation Preferences
+automation_preferences:
+  email_management:
+    enabled: true
+    auto_response: false
+    smart_sorting: true
+    urgency_detection: true
+    auto_archive: true
+    response_templates: {}
+  
+  file_organization:
+    enabled: true
+    auto_organize_downloads: true
+    semantic_naming: true
+    duplicate_detection: true
+    smart_folders: true
+    watched_directories: []
+  
+  calendar_optimization:
+    enabled: true
+    meeting_preparation: true
+    smart_scheduling: true
+    conflict_detection: true
+    travel_time_calculation: false
+    focus_time_blocking: true
+  
+  research_automation:
+    enabled: true
+    sources:
+      - "arxiv"
+      - "scholar"
+      - "github"
+    auto_summarization: true
+    relevance_threshold: 0.7
+    filters:
+      min_relevance_score: 0.6
+      max_results_per_query: 10
+      include_preprints: true
+  
+  notification_management:
+    enabled: true
+    urgent_only: false
+    channels:
+      - "system"
+      - "menu_bar"
+
+# Security Configuration
+security_config:
+  encryption_key_rotation_days: 30
+  require_biometrics: true
+  data_retention_days: 365
+  audit_logging: true
+  secure_connections_only: true
+  encryption_algorithm: "chacha20_poly1305"
+
+# Intelligence Configuration
+intelligence_config:
+  model_configs: {}
+  processing_limits:
+    max_concurrent_tasks: 10
+    max_memory_usage_mb: 1024
+    max_processing_time_seconds: 30
+    batch_size: 32
+  caching_strategy:
+    enabled: true
+    max_cache_size_mb: 512
+    cache_expiry_hours: 24
+    persist_to_disk: true
+  confidence_thresholds:
+    classification: 0.8
+    prediction: 0.7
+    automation: 0.9
+
+# Context Configuration
+context_config:
+  max_context_nodes: 10000
+  context_retention_days: 365
+  relationship_strength_threshold: 0.5
+  pattern_detection_config:
+    enabled: true
+    min_pattern_occurrences: 3
+    analysis_window_days: 30
+    pattern_types:
+      - "temporal"
+      - "behavioral"
+      - "contextual"
+
+# Data Paths (automatically set based on environment)
+data_paths:
+  data_dir: "~/Library/Application Support/Vingi"
+  models_dir: "~/Library/Application Support/Vingi/models"
+  cache_dir: "~/Library/Application Support/Vingi/cache"
+  logs_dir: "~/Library/Application Support/Vingi/logs"
+  context_dir: "~/Library/Application Support/Vingi/context"
+
+# Database Configuration
+database_config:
+  neo4j:
+    uri: "bolt://localhost:7687"
+    username: "neo4j"
+    password: "${NEO4J_PASSWORD}"
+    database: "vingi"
+    encrypted: true
+  
+  sqlite:
+    database_path: "~/Library/Application Support/Vingi/context/temporal_index.db"
+    timeout: 30
+    check_same_thread: false
+
+# Logging Configuration
+logging_config:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  console_enabled: true
+  file_enabled: true
+  json_format: false
+  privacy_filter_enabled: true
+  max_file_size_mb: 10
+  backup_count: 5
+
+# API Configuration (for Python bridge)
+api_config:
+  host: "127.0.0.1"
+  port: 8765
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://127.0.0.1:3000"
+  timeout_seconds: 30
+
+# Environment-specific overrides
+# Development environment
+development:
+  logging_config:
+    level: "DEBUG"
+    console_enabled: true
+  security_config:
+    require_biometrics: false
+  intelligence_config:
+    processing_limits:
+      max_concurrent_tasks: 5
+
+# Production environment
+production:
+  logging_config:
+    level: "INFO"
+    console_enabled: false
+  security_config:
+    require_biometrics: true
+    audit_logging: true
+  privacy_settings:
+    local_processing_only: true
+    analytics_enabled: false
