@@ -1,11 +1,11 @@
 # Vingi: Personal Cognitive Load Optimization Framework
 
 <p align="center">
-  <img src="docs/assets/vingi_logo.png" alt="Vingi Logo" width="300"/>
+  <img src="vingi_logo.gif" alt="Vingi Logo" width="500"/>
 </p>
 
 <p align="center">
-  <em>"Delegate the mundane, amplify the meaningful"</em>
+  <em>"Far too close for comfort"</em>
 </p>
 
 <div align="center">
