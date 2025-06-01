@@ -1,7 +1,7 @@
 # Vingi: Personal Cognitive Load Optimization Framework
 
 <p align="center">
-  <img src="vingi_logo.gif" alt="Vingi Logo" width="500"/>
+  <img src="vingi_logo.gif" alt="Vingi Logo" width="600"/>
 </p>
 
 <p align="center">
